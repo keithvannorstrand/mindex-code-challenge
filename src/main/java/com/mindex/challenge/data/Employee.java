@@ -13,6 +13,17 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String firstName,
+                    String lastName,
+                    String position,
+                    String department
+                    ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position;
+        this.department = department;
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }
@@ -59,5 +70,13 @@ public class Employee {
 
     public void setDirectReports(List<Employee> directReports) {
         this.directReports = directReports;
+    }
+
+    public String toString() {
+        return this.employeeId + " - " + this.firstName + " " + this.lastName;
+    }
+
+    public boolean equals(Employee other) {
+        return this.employeeId.equals(other.getEmployeeId());
     }
 }
