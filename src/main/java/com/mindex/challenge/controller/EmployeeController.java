@@ -3,7 +3,6 @@ package com.mindex.challenge.controller;
 import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
-import com.mindex.challenge.service.CompensationService;
 import com.mindex.challenge.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +15,6 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-
-    @Autowired
-    private CompensationService compensationService;
 
     @PostMapping("/employee")
     public Employee create(@RequestBody Employee employee) {
@@ -49,11 +45,11 @@ public class EmployeeController {
 
     @GetMapping("/employee/compensation/{id}")
     public Compensation fetchEmployeeCompensation(@PathVariable String id) {
-        return compensationService.fetchEmployeeCompensation(id);
+        return employeeService.fetchEmployeeCompensation(id);
     }
 
     @PostMapping("/employee/compensation")
     public Compensation createCompensation(@RequestBody Compensation comp){
-        return compensationService.create(comp);
+        return employeeService.createCompensation(comp);
     }
 }

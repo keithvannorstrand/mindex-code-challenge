@@ -23,6 +23,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private CompensationRepository compensationRepository;
+
     @Override
     public Employee create(Employee employee) {
         LOG.debug("Creating employee [{}]", employee);
@@ -80,6 +83,29 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         LOG.info("employeeIds.size [{}]", employeeIds.size());
         return employeeIds;
+    }
+
+    @Override
+    public Compensation fetchEmployeeCompensation(String id) {
+        Compensation comp = compensationRepository.findByEmployeeId(id);
+
+        if (comp == null) {
+            throw new RuntimeException("Invalid employeeId: " + id);
+        }
+
+        comp.setEmployee(read(id));
+
+        return comp;
+    }
+
+    @Override
+    public Compensation createCompensation(Compensation comp) {
+        LOG.debug("Creating compensation [{}]", comp);
+
+        comp.setCompensationId(UUID.randomUUID().toString());
+        compensationRepository.insert(comp);
+
+        return comp;
     }
 
 }

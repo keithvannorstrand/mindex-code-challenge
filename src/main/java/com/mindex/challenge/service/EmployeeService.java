@@ -9,4 +9,6 @@ public interface EmployeeService {
     Employee read(String id);
     Employee update(Employee employee);
     ReportingStructure fetchReportingStructure(String id);
+    Compensation fetchEmployeeCompensation(String id);
+    Compensation createCompensation(Compensation comp);
 }
