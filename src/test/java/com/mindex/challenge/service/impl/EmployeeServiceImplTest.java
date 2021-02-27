@@ -193,40 +193,6 @@ public class EmployeeServiceImplTest {
         assertEquals(tier4.size() + tier3.size() + tier2.size() + tier1.size(), reportingStructure.getNumberOfReports());
     }
 
-    @Test
-    public void testCreateReadCompensation() {
-        Employee testEmployee = new Employee();
-        testEmployee.setFirstName("John");
-        testEmployee.setLastName("Doe");
-        testEmployee.setDepartment("Engineering");
-        testEmployee.setPosition("Developer");
-
-        // Create checks
-        Employee createdEmployee = restTemplate.postForEntity(employeeUrl, testEmployee, Employee.class).getBody();
-
-        assertNotNull(createdEmployee.getEmployeeId());
-        assertEmployeeEquivalence(testEmployee, createdEmployee);
-
-        // Create a compensation for our new employee
-        Compensation testComp = new Compensation();
-        testComp.setEmployeeId(createdEmployee.getEmployeeId());
-        testComp.setEffectiveDate("04-APR-20");
-        testComp.setSalary(300000);
-
-        Compensation createdComp = restTemplate.postForEntity(employeeCompUrl, testComp, Compensation.class).getBody();
-
-        assertNotNull(createdComp.getCompensationId());
-        assertCompensationEquivalence(testComp, createdComp);
-
-        // Read check
-
-        Compensation readComp = restTemplate.getForEntity(employeeCompIdUrl, Compensation.class, createdComp.getEmployeeId()).getBody();
-        assertNotNull(readComp);
-        assertEmployeeEquivalence(testEmployee, readComp.getEmployee());
-        assertCompensationEquivalence(createdComp, readComp);
-
-    }
-
     private static void assertEmployeeEquivalence(Employee expected, Employee actual) {
         assertEquals(expected.getFirstName(), actual.getFirstName());
         assertEquals(expected.getLastName(), actual.getLastName());

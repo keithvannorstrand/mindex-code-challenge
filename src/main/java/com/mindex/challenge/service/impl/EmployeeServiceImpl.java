@@ -98,14 +98,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         return comp;
     }
 
-    @Override
-    public Compensation createCompensation(Compensation comp) {
-        LOG.debug("Creating compensation [{}]", comp);
-
-        comp.setCompensationId(UUID.randomUUID().toString());
-        compensationRepository.insert(comp);
-
-        return comp;
-    }
-
 }

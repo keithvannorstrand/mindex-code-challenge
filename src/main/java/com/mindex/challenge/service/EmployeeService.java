@@ -10,5 +10,4 @@ public interface EmployeeService {
     Employee update(Employee employee);
     ReportingStructure readReportingStructure(String id);
     Compensation readEmployeeCompensation(String id);
-    Compensation createCompensation(Compensation comp);
 }
