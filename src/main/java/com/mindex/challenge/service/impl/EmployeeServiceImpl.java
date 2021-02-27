@@ -1,8 +1,6 @@
 package com.mindex.challenge.service.impl;
 
-import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
-import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
@@ -22,9 +20,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private CompensationRepository compensationRepository;
 
     @Override
     public Employee create(Employee employee) {
@@ -82,19 +77,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         }
         return employeeIds;
-    }
-
-    @Override
-    public Compensation readEmployeeCompensation(String id) {
-        Compensation comp = compensationRepository.findByEmployeeId(id);
-
-        if (comp == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
-        }
-
-        comp.setEmployee(read(id));
-
-        return comp;
     }
 
 }
