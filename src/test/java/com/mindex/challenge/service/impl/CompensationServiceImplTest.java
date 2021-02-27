@@ -12,6 +12,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -56,7 +58,7 @@ public class CompensationServiceImplTest {
         // Create a compensation for our new employee
         Compensation testComp = new Compensation();
         testComp.setEmployeeId(createdEmployee.getEmployeeId());
-        testComp.setEffectiveDate("04-APR-20");
+        testComp.setEffectiveDate(new Date());
         testComp.setSalary(300000);
 
         Compensation createdComp = restTemplate.postForEntity(employeeCompUrl, testComp, Compensation.class).getBody();

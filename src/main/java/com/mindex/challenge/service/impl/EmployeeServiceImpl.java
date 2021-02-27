@@ -81,7 +81,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 createReportsSet(employeeIds,employee.getDirectReports());
             }
         }
-        LOG.info("employeeIds.size [{}]", employeeIds.size());
         return employeeIds;
     }
 
