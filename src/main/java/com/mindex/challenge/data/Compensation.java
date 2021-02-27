@@ -7,8 +7,7 @@ public class Compensation {
     private String employeeId;
     private Employee employee;
     private double salary;
-    // this should be a Date object
-    private String effectiveDate;
+    private Date effectiveDate;
 
     public Compensation () { }
 
@@ -28,11 +27,11 @@ public class Compensation {
         return employee;
     }
 
-    public void setEffectiveDate(String effectiveDate) {
+    public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
-    public String getEffectiveDate() {
+    public Date getEffectiveDate() {
         return effectiveDate;
     }
 

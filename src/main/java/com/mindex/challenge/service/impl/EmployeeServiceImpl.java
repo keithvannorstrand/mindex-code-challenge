@@ -1,8 +1,6 @@
 package com.mindex.challenge.service.impl;
 
-import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
-import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
@@ -22,9 +20,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private CompensationRepository compensationRepository;
 
     @Override
     public Employee create(Employee employee) {
@@ -57,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ReportingStructure fetchReportingStructure(String id) {
+    public ReportingStructure readReportingStructure(String id) {
         Employee employee = employeeRepository.findByEmployeeId(id);
         LOG.info("ReportingStructure for [{}]", employee);
 
@@ -73,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private HashSet<String> createReportsSet(HashSet<String> employeeIds, List<Employee> directReports) {
         for (int i=0; i<directReports.size(); i++) {
-            Employee employee = employeeRepository.findByEmployeeId(directReports.get(i).getEmployeeId());
+            Employee employee = read(directReports.get(i).getEmployeeId());
             LOG.info("createReportsSet: [{}]", employee);
             directReports.set(i, employee);
             employeeIds.add(employee.getEmployeeId());
@@ -81,31 +76,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 createReportsSet(employeeIds,employee.getDirectReports());
             }
         }
-        LOG.info("employeeIds.size [{}]", employeeIds.size());
         return employeeIds;
-    }
-
-    @Override
-    public Compensation fetchEmployeeCompensation(String id) {
-        Compensation comp = compensationRepository.findByEmployeeId(id);
-
-        if (comp == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
-        }
-
-        comp.setEmployee(read(id));
-
-        return comp;
-    }
-
-    @Override
-    public Compensation createCompensation(Compensation comp) {
-        LOG.debug("Creating compensation [{}]", comp);
-
-        comp.setCompensationId(UUID.randomUUID().toString());
-        compensationRepository.insert(comp);
-
-        return comp;
     }
 
 }
