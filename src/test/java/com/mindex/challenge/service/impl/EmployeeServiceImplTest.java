@@ -46,9 +46,9 @@ public class EmployeeServiceImplTest {
     public void setup() {
         employeeUrl = "http://localhost:" + port + "/employee";
         employeeIdUrl = "http://localhost:" + port + "/employee/{id}";
-        reportingStructureUrl = "http://localhost:" + port + "/employee/reportingStructure/{id}";
-        employeeCompUrl = "http://localhost:" + port + "/employee/compensation";
-        employeeCompIdUrl = "http://localhost:" + port + "/employee/compensation/{id}";
+        reportingStructureUrl = "http://localhost:" + port + "/employee/{id}/reportingStructure";
+        employeeCompUrl = "http://localhost:" + port + "/compensation";
+        employeeCompIdUrl = "http://localhost:" + port + "/employee/{id}/compensation";
     }
 
     @Test

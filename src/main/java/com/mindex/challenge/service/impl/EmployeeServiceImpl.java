@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ReportingStructure fetchReportingStructure(String id) {
+    public ReportingStructure readReportingStructure(String id) {
         Employee employee = employeeRepository.findByEmployeeId(id);
         LOG.info("ReportingStructure for [{}]", employee);
 
@@ -73,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private HashSet<String> createReportsSet(HashSet<String> employeeIds, List<Employee> directReports) {
         for (int i=0; i<directReports.size(); i++) {
-            Employee employee = employeeRepository.findByEmployeeId(directReports.get(i).getEmployeeId());
+            Employee employee = read(directReports.get(i).getEmployeeId());
             LOG.info("createReportsSet: [{}]", employee);
             directReports.set(i, employee);
             employeeIds.add(employee.getEmployeeId());
@@ -86,7 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Compensation fetchEmployeeCompensation(String id) {
+    public Compensation readEmployeeCompensation(String id) {
         Compensation comp = compensationRepository.findByEmployeeId(id);
 
         if (comp == null) {

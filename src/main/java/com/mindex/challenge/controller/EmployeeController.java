@@ -38,18 +38,14 @@ public class EmployeeController {
         return employeeService.update(employee);
     }
 
-    @GetMapping("/employee/reportingStructure/{id}")
-    public ReportingStructure fetchReportingStructure(@PathVariable String id) {
-        return employeeService.fetchReportingStructure(id);
+    @GetMapping("/employee/{id}/reportingStructure")
+    public ReportingStructure readReportingStructure(@PathVariable String id) {
+        return employeeService.readReportingStructure(id);
     }
 
-    @GetMapping("/employee/compensation/{id}")
-    public Compensation fetchEmployeeCompensation(@PathVariable String id) {
-        return employeeService.fetchEmployeeCompensation(id);
+    @GetMapping("/employee/{id}/compensation")
+    public Compensation readEmployeeCompensation(@PathVariable String id) {
+        return employeeService.readEmployeeCompensation(id);
     }
 
-    @PostMapping("/employee/compensation")
-    public Compensation createCompensation(@RequestBody Compensation comp){
-        return employeeService.createCompensation(comp);
-    }
 }
